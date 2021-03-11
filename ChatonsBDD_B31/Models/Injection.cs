@@ -10,10 +10,13 @@ namespace ChatonsBDD_B31.Models
     {
         public int Id { get; set; }
 
-        [MaxLength(50)]
         [Display(Name = "Date")]
         [Required(ErrorMessage = "Le champ est obligatoire")]
         public DateTime date { get; set; }
+
+        [Display(Name = "Date de rappel")]
+        [Required(ErrorMessage = "Le champ est obligatoire")]
+        public DateTime recall { get; set; }
 
         [MaxLength(50)]
         [Display(Name = "Marque")]

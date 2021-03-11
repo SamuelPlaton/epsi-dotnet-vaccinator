@@ -43,7 +43,7 @@ namespace ChatonsBDD_B31.Controllers
         // GET: Injections/Create
         public IActionResult Create()
         {
-            ViewData["users"] = new SelectList(_context.User, "Id", "firstName", "lastName");
+            ViewData["users"] = new SelectList(_context.User, "Id", dataTextField: "firstName", "lastName", dataGroupField: "category");
             ViewData["vaccines"] = new SelectList(_context.Vaccine, "Id", "name");
             return View();
         }
@@ -53,7 +53,7 @@ namespace ChatonsBDD_B31.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,date,brand")] Injection injection, int User, int Vaccine)
+        public async Task<IActionResult> Create([Bind("Id,date,recall,brand")] Injection injection, int User, int Vaccine)
         {
             var user = await _context.User.FindAsync(User);
             var vaccine = await _context.Vaccine.FindAsync(Vaccine);
@@ -98,7 +98,7 @@ namespace ChatonsBDD_B31.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,date,brand")] Injection injection)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,date,recall,brand")] Injection injection)
         {
             if (id != injection.Id)
             {

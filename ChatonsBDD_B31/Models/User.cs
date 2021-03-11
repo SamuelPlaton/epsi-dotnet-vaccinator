@@ -8,15 +8,15 @@ namespace ChatonsBDD_B31.Models
 {
     public enum Gender
     {
-       male,
-       female,
-       other
+       Homme,
+       Femme,
+       Autre
     }
 
     public enum Category
     {
-        resident,
-        staff
+        Résident,
+        Personnel
     }
 
     public class User

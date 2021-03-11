@@ -15,7 +15,7 @@ namespace ChatonsBDD_B31.Models
         [Required(ErrorMessage = "Le champ est obligatoire")]
         public string name { get; set; }
 
-        [Display(Name = "Périodicité (en années)")]
+        [Display(Name = "Périodicité (en semaines)")]
         [Required(ErrorMessage = "Le champ est obligatoire")]
         public int periodicity { get; set; }
     }
