@@ -27,16 +27,22 @@
             @Html.DisplayFor(model => model.brand)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.lot)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.lot)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.user)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.user.firstName)
+            <a href="/Users/Details/@Html.DisplayFor(model => model.user.Id)">@Html.DisplayFor(model => model.user.firstName) @Html.DisplayFor(model => model.user.lastName) </a>
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.vaccine)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.vaccine.name)
+            <a href="/Vaccines/Details/@Html.DisplayFor(model => model.vaccine.Id)">@Html.DisplayFor(model => model.vaccine.name) </a>
         </dd>
     </dl>
     

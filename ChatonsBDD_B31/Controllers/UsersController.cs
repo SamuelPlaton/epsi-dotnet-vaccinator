@@ -1,8 +1,10 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ChatonsBDD_B31.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ChatonsBDD_B31.Models;
 
 namespace ChatonsBDD_B31.Controllers
 {
@@ -31,6 +33,8 @@ namespace ChatonsBDD_B31.Controllers
                 return NotFound();
             }
 
+            var injections = _context.Injection.Include(i =>  i.vaccine).Where(i => i.user.Id.Equals(id));
+            ViewBag.injections = injections;
             return View(user);
         }
 

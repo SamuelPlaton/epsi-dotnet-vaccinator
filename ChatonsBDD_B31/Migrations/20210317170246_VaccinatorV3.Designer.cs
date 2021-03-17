@@ -3,14 +3,16 @@ using System;
 using ChatonsBDD_B31.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChatonsBDD_B31.Migrations
 {
     [DbContext(typeof(ContexteBDD))]
-    partial class ContexteBDDModelSnapshot : ModelSnapshot
+    [Migration("20210317170246_VaccinatorV3")]
+    partial class VaccinatorV3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

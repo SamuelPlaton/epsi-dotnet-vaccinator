@@ -22,6 +22,9 @@
                 @Html.DisplayNameFor(model => model.brand)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.lot)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.user)
             </th>
             <th>
@@ -41,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lot)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.user.firstName) @Html.DisplayFor(modelItem => item.user.lastName)

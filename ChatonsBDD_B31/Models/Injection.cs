@@ -23,6 +23,11 @@ namespace ChatonsBDD_B31.Models
         [Required(ErrorMessage = "Le champ est obligatoire")]
         public string brand { get; set; }
 
+        [MaxLength(50)]
+        [Display(Name = "Référence Lot")]
+        [Required(ErrorMessage = "Le champ est obligatoire")]
+        public string lot { get; set; }
+
         [Display(Name = "Personne")]
         [Required(ErrorMessage = "Le champ est obligatoire")]
         public virtual User user { get; set; }

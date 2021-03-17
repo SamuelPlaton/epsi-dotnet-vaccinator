@@ -31,12 +31,14 @@ namespace ChatonsBDD_B31.Controllers
             }
 
             var injection = await _context.Injection
+                .Include(injection => injection.user)
+                .Include(injection => injection.vaccine)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (injection == null)
             {
                 return NotFound();
             }
-
+           
             return View(injection);
         }
 
@@ -53,7 +55,7 @@ namespace ChatonsBDD_B31.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,date,recall,brand")] Injection injection, int User, int Vaccine)
+        public async Task<IActionResult> Create([Bind("Id,date,recall,brand,lot")] Injection injection, int User, int Vaccine)
         {
             var user = await _context.User.FindAsync(User);
             var vaccine = await _context.Vaccine.FindAsync(Vaccine);
@@ -85,7 +87,7 @@ namespace ChatonsBDD_B31.Controllers
                 return NotFound();
             }
 
-            var injection = await _context.Injection.FindAsync(id);
+            var injection = await _context.Injection.FirstOrDefaultAsync(m => m.Id == id);
             if (injection == null)
             {
                 return NotFound();
@@ -98,7 +100,7 @@ namespace ChatonsBDD_B31.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,date,recall,brand")] Injection injection)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,date,recall,brand,lot")] Injection injection)
         {
             if (id != injection.Id)
             {
@@ -137,6 +139,8 @@ namespace ChatonsBDD_B31.Controllers
             }
 
             var injection = await _context.Injection
+                .Include(injection => injection.user)
+                .Include(injection => injection.vaccine)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (injection == null)
             {
