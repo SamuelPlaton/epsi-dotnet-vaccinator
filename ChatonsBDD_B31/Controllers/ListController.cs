@@ -25,11 +25,26 @@ namespace ChatonsBDD_B31.Controllers
 
             DateTime past = DateTime.Now.AddYears(-1);
 
+            // Retrieve users that are vaccinated from the 'Grippe'
             var injections = _context.Injection
                 .Include(i => i.vaccine)
                 .Include(i => i.user)
-                .Where(i => i.vaccine.name.Equals("Grippe") && i.date >= past);
-            return View(injections);
+                .Where(i => i.vaccine.name.Equals("Grippe") && i.date >= past)
+                .ToList();
+
+            var users = _context.User.ToList();
+
+            for (int i = 0; i < injections.Count(); i++)
+            {
+                Injection actualInjection = injections[i];
+                User userFound = users.Find(x => x.Id.Equals(actualInjection.user.Id));
+                // If we found a vaccinated user, we remove him
+                if (userFound != null)
+                {
+                    users.Remove(userFound);
+                }
+            }
+            return View(users);
         }
 
         // GET: ListeCovid
@@ -38,8 +53,34 @@ namespace ChatonsBDD_B31.Controllers
             var injections = _context.Injection
                 .Include(i => i.vaccine)
                 .Include(i => i.user)
-                .Where(i => i.vaccine.name.Equals("Covid"));
-            return View(injections);
+                .Where(i => i.vaccine.name.Equals("Covid"))
+                .ToList();
+
+
+            List<Injection> lastInjections = new List<Injection>();
+
+            // Filter to get only the latest injection if it exist
+            for (int i = 0; i < injections.Count(); i++)
+            {
+                Injection actualInjection = injections[i];
+                Injection injectionFound = lastInjections.Find(x => x.user.Id.Equals(actualInjection.user.Id) && x.vaccine.Id.Equals(actualInjection.vaccine.Id));
+                // If we found an existing injection
+                if (injectionFound != null)
+                {
+                    // If it's a later one, change it
+                    if (actualInjection.recall > injectionFound.recall)
+                    {
+                        lastInjections.Remove(injectionFound);
+                        lastInjections.Add(actualInjection);
+                    }
+                    //Else do nothing
+                }
+                else // Else if we found no existing injection, add it
+                {
+                    lastInjections.Add(actualInjection);
+                }
+            }
+            return View(lastInjections);
         }
 
         // GET: ListeRetard
@@ -53,6 +94,7 @@ namespace ChatonsBDD_B31.Controllers
 
             List<Injection> lastInjections = new List<Injection>();
 
+            // Filter to get only the last injection for each vaccine
             for (int i = 0; i < injections.Count(); i++)
             {
                 Injection actualInjection = injections[i];

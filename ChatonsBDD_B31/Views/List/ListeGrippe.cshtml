@@ -1,55 +1,51 @@
-@model IEnumerable<ChatonsBDD_B31.Models.Injection>
+@model IEnumerable<ChatonsBDD_B31.Models.User>
 
 @{
     ViewData["Title"] = "Liste";
 }
 
-<h1>Vaccines de la Grippe cette annee</h1>
+<h1>Non vaccines de la Grippe cette annee</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.user)
+                @Html.DisplayNameFor(model => model.firstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.date)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.brand)
+                @Html.DisplayNameFor(model => model.lastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.lot)
+                @Html.DisplayNameFor(model => model.birthDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.vaccine)
+                @Html.DisplayNameFor(model => model.gender)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.category)
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.user.firstName) @Html.DisplayFor(modelItem => item.user.lastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lot)
-            </td>
-
-            <td>
-                <a asp-controller="Injections" asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
-                <a asp-controller="Injections" asp-action="Details" asp-route-id="@item.Id">Detail</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.firstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.birthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category)
+                </td>
+            </tr>
         }
     </tbody>
 </table>

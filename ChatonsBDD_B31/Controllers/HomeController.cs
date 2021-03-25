@@ -25,31 +25,5 @@ namespace ChatonsBDD_B31.Controllers
                 View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult TestAction()
-        {
-            //Construction d'un modèle
-            //var headers = new Dictionary<string, string>();
-
-            //foreach (var item in Request.Headers)
-            //{
-            //    headers.Add(item.Key, item.Value);
-            //}
-            var headers = Request.Headers.ToDictionary(item => item.Key, item => item.Value.ToList());
-
-            ViewData["Title"] = "Accueil";
-
-            return View(headers);
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
